@@ -20,7 +20,33 @@ fun main(args: Array<String>) {
     eoghan.weapon = axe
 
     val redPotion = Loot("RedPotion", LootType.POTION, 7.50)
-    tim.inventory.add(redPotion)
+    tim.getLoot(redPotion)
+    val chestArmour = Loot( "+3 Chest Armour", LootType.ARMOUR, 80.00)
+    tim.getLoot(chestArmour)
+
+    tim.showInventory()
+
+    tim.getLoot(Loot("Ring of protection +2", LootType.RING, 40.25))
+
+    tim.getLoot(Loot("Invisibility", LootType.POTION, 35.95))
+    tim.showInventory()
+
+    if(tim.dropLoot(redPotion)){
+        tim.showInventory()
+    }else{
+        println("you dont have a ${redPotion.name}")
+    }
+
+    val bluePotion = Loot("Blue Potion", LootType.POTION, 6.00)
+
+    if(tim.dropLoot(bluePotion)){
+        tim.showInventory()
+    }else{
+        println("You dont have ${bluePotion.name}")
+    }
+
+     tim.dropLoot("Invisibility Potion")
+
     tim.showInventory()
 
 }

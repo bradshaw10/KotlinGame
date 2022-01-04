@@ -3,22 +3,51 @@ class Player(val name: String, var level: Int = 1,
 
     var weapon: Weapon = Weapon("Fist", 1);
 
-    val inventory = ArrayList<Loot>()
+    private val inventory = ArrayList<Loot>()
 
     fun show(){
-        println("""
+        if(lives > 0){
+            println("$name is alive")
+        }else{
+            println("$name is dead")
+        }
+    }
+
+    fun getLoot(item: Loot){
+        inventory.add(item)
+        //ToDo code to save inventory to disk
+    }
+
+    fun dropLoot(item: Loot): Boolean {
+        return if (inventory.contains(item)) {
+            inventory.remove(item)
+            true
+        }else{
+            false
+        }
+    }
+
+    fun dropLoot(name: String): Boolean{
+        println("$name will be dropped")
+        return true
+        //inventory.removeIf { it.name == name }
+    }
+
+    override fun toString(): String{
+        return("""
             name: $name
             lives: $lives
             level: $level
             score: $score
-            weapon: ${weapon.name}
-            damage:${weapon.damageInflicted}
+            weapon: $weapon
         """)
     }
 
     fun showInventory(){
         println("$name's inventory")
-        println(inventory.get(0))
+        for(item in inventory){
+            println(item)
+        }
         println("*************")
     }
 }
