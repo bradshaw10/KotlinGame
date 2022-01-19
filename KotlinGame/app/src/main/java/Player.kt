@@ -29,8 +29,15 @@ class Player(val name: String, var level: Int = 1,
 
     fun dropLoot(name: String): Boolean{
         println("$name will be dropped")
-        return true
-        //inventory.removeIf { it.name == name }
+        for (items in inventory)
+        {
+            if(items.name == name){
+                inventory.remove(items)
+                return true
+            }
+        }
+        println("No Such thing")
+        return false
     }
 
     override fun toString(): String{
@@ -45,9 +52,12 @@ class Player(val name: String, var level: Int = 1,
 
     fun showInventory(){
         println("$name's inventory")
+        var total = 0.0
         for(item in inventory){
             println(item)
+            total += item.value
         }
         println("*************")
+        println("Total score is: $total")
     }
 }
